@@ -1,14 +1,17 @@
+
+// -------Essential Tests -------
 // - [x]  Get the `Name` input and type a name in it.
 // - [x]  Use an assertion to check if the text inputted contains the name you provided (Hint: use the .should assertion)
 // - [x]  Get the `Email` input and type an email address in it
 // - [x] Get the `password` input and type a password in it
 // - [x]  Set up a test that will check to see if a user can check the terms of service box
 // - [x] Check to see if a user can submit the form data
-// - [ ] Check for form validation if an input is left empty
+// - [x] Check for form validation if an input is left empty
 
 // beginning of Cypress tests
 
-describe('User-Onboarding App', () => {
+
+describe('Testing User Interaction with form elements', () => {
     it('Can navigate to http://localhost:3001', () => {
             cy.visit('http://localhost:3001')
     })
@@ -41,17 +44,10 @@ describe('User-Onboarding App', () => {
             .click()
     })
 
-    it('Validation Error is flagged on missing input' , () => {
-        cy.get('input[name = "name"]').type('John Smith')
-        cy.get('input[name = "email"]').type('john.smith@apple.com')
-        cy.get('input[name = "password"]').type('password')
-        cy.get('input[name = "terms"]').check()
-        
-    })
 })
 
 
-describe('User-Onboarding App', () => {
+describe('Testing validation errors', () => {
     it('Can navigate to http://localhost:3001', () => {
             cy.visit('http://localhost:3001')
     })
@@ -60,9 +56,8 @@ describe('User-Onboarding App', () => {
         cy.get('input[name = "name"]').type('John Smith')
         cy.get('input[name = "email"]').type('john.smith@apple.com')
         cy.get('input[name = "password"]').type('12')
-            .then((errors) => {
-                expect(errors[0].validationMessage).to.eq('Your Password needs to have atleast 3 characters')
-            })
+        cy.get('#cypress')
+            .should('contain', 'Your Password needs to have atleast 3 characters')
     })
 
 })
