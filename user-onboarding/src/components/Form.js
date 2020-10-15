@@ -8,6 +8,9 @@ const Form = (props) => {
     const { 
         change,
         values,
+        submit,
+        disabled,
+        errors,
      } = props
 
     const onChange = evt => {
@@ -15,13 +18,26 @@ const Form = (props) => {
         console.log(name)
         console.log(value)
         change(name, value) // when I type in an input field the onChange listener records
-        
+    }
+
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
     }
 
     return (
         <div>
 
-        <form>
+        <form onSubmit={onSubmit}>
+
+            {/* Render the validation errors */}
+                <div className='errors'>
+                <div>{errors.name}</div>
+                <div>{errors.email}</div>
+                <div>{errors.password}</div>
+                <div>{errors.terms}</div>
+            </div>
+
             <label> Name:
                 <input
                     name='name'
