@@ -40,12 +40,12 @@ function App() {
   const [disabled, setDisabled] = useState(initialDisabled)
 
 const inputChange = (name, value) => {
-
+//----- code below is for validation purposes ----
   yup
     .reach(formSchema, name)
     .validate(value)
     .then(valid => {
-      setUserForm({...userForm, [name]: value})
+      setFormErrors({...formErrors, [name]: ''})
       
     })
     .catch(err => {
@@ -53,6 +53,10 @@ const inputChange = (name, value) => {
         ...formErrors, 
         [name]: err.errors[0]
       })
+    })
+
+    setUserForm({
+      ...userForm, [name]: value
     })
 
 }
@@ -84,14 +88,14 @@ const formSubmit = () => {
   postNewUser(newUser)
 
 }
-
+//--------- side effects ------
 // ----
 // useEffect(() => {
 //   getFriends()
 // }, [])
 
 useEffect(() => {
-  // 🔥 STEP 9- ADJUST THE STATUS OF `disabled` EVERY TIME `formValues` CHANGES
+  
   formSchema.isValid(userForm)
     .then(valid => {
       setDisabled(!valid);

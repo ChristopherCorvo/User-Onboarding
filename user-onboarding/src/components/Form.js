@@ -14,10 +14,13 @@ const Form = (props) => {
      } = props
 
     const onChange = evt => {
-        const {name, value} = evt.target
+        const {name, value, checked, type} = evt.target
         console.log(name)
         console.log(value)
-        change(name, value) // when I type in an input field the onChange listener records
+        console.log(type)
+        console.log(checked)
+        const valueToUse = type === 'checkbox' ? checked : value
+        change(name, valueToUse) // when I type in an input field the onChange listener records
     }
 
     const onSubmit = evt => {
@@ -68,13 +71,14 @@ const Form = (props) => {
             <label> Terms of Service:
                 <input
                         name='terms'
-                        checked = {!true}
-                        onChange = {onChange} 
                         type='checkbox'
+                        checked = {values.terms}
+                        onChange = {onChange} 
+                        
                     />
             </label>
 
-            <button>Submit</button>
+            <button disabled = {disabled}>Submit</button>
         </form>
 
         </div>
