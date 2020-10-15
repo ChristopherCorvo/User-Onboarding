@@ -37,7 +37,7 @@ const Form = (props) => {
                 <div className='errors'>
                 <div>{errors.name}</div>
                 <div>{errors.email}</div>
-                <div>{errors.password}</div>
+                <div id='cypress'>{errors.password}</div>
                 <div>{errors.terms}</div>
             </div>
 
